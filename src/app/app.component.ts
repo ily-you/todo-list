@@ -16,4 +16,15 @@ export class AppComponent {
     'item 5',
     'foobar'
   ];
+
+  public addItem($event: KeyboardEvent): void /*type de retour(aucun retour dans la fonction) */ {
+    if ($event.code === 'Enter'){
+      const $input: HTMLInputElement|null = $event.target as HTMLInputElement;
+      if($input !== null){
+        console.log($input.value);
+      }
+      console.log('Enter pressed');
+    }
+   
+  }
 }

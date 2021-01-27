@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({ // decorator (Typescript) - Add some info to the class bellow. start with@, just before a class.
   //This decorator (@component) said is a web component.
@@ -8,7 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CheckboxComponent implements OnInit {
  private static counter = 0;
- public id: string;;
+ public id: string;
+@Input()
+
+ public checked = false;
+
+ @Input() // Decore our label attribute. add info for angular.
+ public label: string|null = null;
   constructor() {
     this.id = 'app-checkbox-'  + CheckboxComponent.counter;
     CheckboxComponent.counter++;

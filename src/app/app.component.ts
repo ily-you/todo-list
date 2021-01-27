@@ -8,9 +8,19 @@ import {TodoItem} from './todo-item';
 })
 export class AppComponent {
   title = 'todo-list';
-
+  public tmp= true;
   public todoArray: Array<TodoItem> = [];
 
+  /** utiliser getter pour transformer le array en boolean. true si au moin un todoitem est checked. un getter s'utilise comme un attribut normal */
+  public get atleastOneChecked(): boolean{
+    for (let item of this.todoArray){ // for (let i = 0;i < this.todoArray.length;i++){const item = this.todoArray[i]}
+      if(item.checked){
+    return true;
+      }
+    }
+    return false;
+  }
+ 
   /**
    * This method is used in app.component.html on a keyup event on the text input.
    * It take a KeyboardEvent as argument and return void (mean its return nothing).
@@ -24,7 +34,7 @@ export class AppComponent {
       // const $input: HTMLInputElement|null = $event.target as HTMLInputElement;
       // const $input = $event.target as HTMLInputElement;
 
-      const $input: EventTarget|null = $event.target;
+      const $input: EventTarget|null = $event.target; /////*****!!!!!
 
       // Prefer using this instead of "as" example above.
       // Check the real type of our object inside $input, if its a HTMLInputElement instance.
@@ -63,19 +73,19 @@ export class AppComponent {
     //   }
     // }
 
-    // Solution 2
-    // for (let i = this.todoArray.length - 1; i >= 0; i--) {
-    //   if (this.todoArray[i].checked === true) {
-    //     this.todoArray.splice(i, 1);
-    //   }
-    // }
+     //Solution 2
+     for (let i = this.todoArray.length - 1; i >= 0; i--) {
+       if (this.todoArray[i].checked === true) {
+         this.todoArray.splice(i, 1);
+       }
+     }
 
     // Solution 3
-    this.todoArray = this.todoArray.filter((item: TodoItem) => {
+    //this.todoArray = this.todoArray.filter(item: TodoItem) => {
       // return true; // If you want to keep the element into the new array.
       // return false; // If you want to remove the element from the new array.
 
-      return !item.checked;
+      //return !item.checked;
 
       // Long version to replace de line 78.
       // if (item.checked === true) {
@@ -83,6 +93,5 @@ export class AppComponent {
       // } else {
       //   return true;
       // }
-    });
   }
 }

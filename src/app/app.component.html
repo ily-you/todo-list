@@ -4,14 +4,18 @@
             <h1 class="text-center" style="color: gainsboro; font-size: 100px;">
                 todos
             </h1>
-
+            <app-checkbox></app-checkbox>
+            <app-checkbox></app-checkbox>
+            <app-checkbox></app-checkbox>
+            <app-checkbox></app-checkbox>
             <div class="card" style="width: 500px; margin-left: 300px;">
-                <div class="card-header">
+                <div class="card-header" style="background-color: white;">
                     <div class="form-group">
                         <!-- Add an keyup event listener on input. Trigger addItem method from app.component.ts -->
                         <!-- Angular give us a $event variable when using event listener.  -->
                         <!-- It contain the same object as javascript event listener -->
                         <input type="text" class="form-control" placeholder="What needs to be done?" (keyup)="addItem($event)">
+                        <!--j'ajoute l'event quand j'appuie sur une touche du clavier-->
                     </div>
                 </div>
 
@@ -21,28 +25,27 @@
                             <!-- Use [attr.CHANGE-ME] to dynamically generate an attribute named CHANGE-ME (eg. id, name, type, disabled, etc...) -->
                             <!-- If the given value is a boolean, if true, the attribute is present in HTML, if false, attribute is remove from HTML -->
                             <input class="form-check-input" type="checkbox" [attr.id]="'todo-check-' + itemIndex" [(ngModel)]="item.checked">
-                            <label class="form-check-label" [attr.for]="'todo-check-' + itemIndex">
+                            <!--ng model : relie typescript dans liste todo et relier à l'input checkbox-->
+                            <label class=" form-check-label " [class.done]="item.checked" [attr.for]=" 'todo-check-' + itemIndex ">
                   {{ item.title }}
                 </label>
                         </div>
 
-                        <button class="btn btn-outline-danger btn-sm" (click)="removeItem(itemIndex)">
+                        <button class="btn btn-outline-danger btn-sm " (click)="removeItem(itemIndex) ">
                 x
               </button>
                     </li>
                 </ul>
 
-                <div class="card-footer d-flex justify-content-between">
+                <div class="card-footer d-flex justify-content-between " style="background-color: white; ">
                     <div>
                         {{ todoArray.length }} items
                     </div>
-
-                    <button class="btn btn-sm btn-link" (click)="clearCompletedItem()">
-              Clear completed
-            </button>
+                    <!--*ngIf prend un boolean, si true , montre l'element si faux, cacher l'element-->
+                    <button *ngIf="atleastOneChecked " class="btn btn-sm btn-link " (click)="clearCompletedItem() "> Clear completed
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<router-outlet></router-outlet>
